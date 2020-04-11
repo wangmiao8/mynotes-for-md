@@ -46,28 +46,28 @@ position 的五个属性：static（静态定位）、relative（相对定位）
 
 **定位原则：**
 
-- relative 相对自身定位
+- relative 相对自身定位；
 
-- absolute 相对非 static 的祖先元素定位
+- absolute 相对非 static 的祖先元素定位；
 
-- sticky 相对最近的滚动父元素和最近的块级父元素定位
+- sticky 相对最近的滚动父元素和最近的块级父元素定位；
 
-- fixed 相对视口（viewport）定位
+- fixed 相对视口（viewport）定位；
 
 
 
 **属性的特性：**
 
-- absolute 和 fixed，设置后会脱离正常的文档流，并且创建 BFC
+- absolute 和 fixed，设置后会脱离正常的文档流，并且创建 BFC；
 
-- 在 sticky 的父元素上设置 overflow 为 visible 以外的值会导致 sticky 无效
+- 在 sticky 的父元素上设置 overflow 为 visible 以外的值会导致 sticky 无效；
 
 
 
 **fixed 和 sticky 的不同：**
 
-- 设置 position 为 fixed 后会脱离正常文档流，而 sticky 不会
-- sticky 相对滚动父元素定位，受父元素约束，而 fixed 已脱离文档流，相对视口定位
+- 设置 position 为 fixed 后会脱离正常文档流，而 sticky 不会；
+- sticky 相对滚动父元素定位，受父元素约束，而 fixed 已脱离文档流，相对视口定位；
 
 
 
@@ -154,23 +154,29 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **创建 BFC 的方法：**
 
-- **html**
-- **float** 不为 none
-- **position** 值为 absolute 或 fixed
-- **display** 值为 inline-block、flex、table-cell
-- **overflow** 不为 visiable
+- **html**；
+- **float** 不为 none；
+- **position** 值为 absolute 或 fixed；
+- **display** 值为 inline-block、flex、table-cell、table-caption；
+- **overflow** 不为 visiable；
 
 
 
 **BFC 渲染规则：**
+
+- BFC 容器内块级元素从上到下排列；
+
+- 同一个 BFC 容器内相邻的元素间的 margin 会发生重叠；
+- 每个元素的 margin box 的左边，与容器的 border box 的左边相接触；
+- BFC 为页面上独立的容器，内部元素不会影响到外部元素，反之亦然；
+- 计算 BFC 容器高度时，包含内部所有元素的高度，浮动元素也包括；
+- 浮动元素不会叠加到 BFC 容器上；
 
 
 
 ## 清除浮动
 
 浮动（float）会导致元素脱离标准文档流，可能引起父元素高度塌陷，影响兄弟元素的排版。
-
-
 
 ![浮动效果](https://user-gold-cdn.xitu.io/2017/10/18/2af797ffc0918352ac8d381994ff1a27?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
 
@@ -180,7 +186,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 
 
-第一种：在浮动元素后创建新的块级元素添加 `clear:both` 或者 `clear:left`
+第一种：在浮动元素后创建新的块级元素添加 `clear:both` 或者 `clear:left`。
 
 ```html
 <div class="wrapperDiv">
@@ -199,7 +205,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 
 
-第二种：浮动元素的父元素上使用 overflow 触发 BFC
+第二种：浮动元素的父元素上使用 overflow 触发 BFC。
 
 ```css
 .wrapperDiv {
@@ -209,7 +215,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 
 
- 第三种：浮动元素的父元素上使用伪元素
+ 第三种：浮动元素的父元素上使用伪元素。
 
 ```css
 .clearfix:after {
@@ -232,7 +238,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **1. margin**  
 
-适用于块级元素
+适用于块级元素。
 
 ```css
 .block {
@@ -242,7 +248,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **2. text-align**
 
-适用于行内元素
+适用于行内元素。
 
 ```css
 .inline {
@@ -252,7 +258,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **3. flex**
 
-如果不考虑兼容性，使用 flex
+如果不考虑兼容性，使用 flex。
 
 ```css
 .parentbox {
@@ -263,7 +269,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **4. position + transform**
 
-块级元素和行内元素均适用
+块级元素和行内元素均适用。
 
 ```css
 .parentbox {
@@ -278,7 +284,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **5. position + margin-left**
 
-与上一种方法原理一样，**但需要知道元素自身的宽度**
+与上一种方法原理一样，**但需要知道元素自身的宽度。**
 
 ```css
 .parentbox {
@@ -297,7 +303,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **1.  line-height**
 
-适用于单行文本，并且知道元素的高度
+适用于单行文本，并且知道元素的高度。
 
 ```css
 .block {
@@ -308,7 +314,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **2. table-cell + vertical-align**
 
-适用单行的子元素（块级或者行内都适用）
+适用单行的子元素（块级或者行内都适用）。
 
 ```css
 .parentbox {
@@ -319,7 +325,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **3. flex**
 
-如果不考虑兼容性，使用 flex
+如果不考虑兼容性，使用 flex。
 
 ```css
 .parentbox {
@@ -330,7 +336,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **4. position + tranform**
 
-块级元素和行内元素均适用
+块级元素和行内元素均适用。
 
 ```css
 .parentbox {
@@ -345,7 +351,7 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 **5. position + margin**
 
-与上一种方法原理一样，**但需要知道元素自身的高度**
+与上一种方法原理一样，**但需要知道元素自身的高度**。
 
 ```css
 .parentbox {
@@ -360,13 +366,31 @@ BFC 解决的问题：**浮动的影响（高度坍塌、元素重叠）、外�
 
 
 
-## 常见布局
+## 布局
+
+传统的布局方式：table、float、position
+
+CSS3 后新的布局方式：flex、grid
+
+
+
+**记忆心得：**
+
+需要组合才能实现双栏、三栏的布局的 float、position；
+
+不管是双栏、三栏或者更多的固定宽度或不固定宽度万能布局的 table、flex、grid。
+
+
 
 ### 双栏布局
+
+
 
 ### 三栏布局
 
 float、position、flex、table、grid
+
+
 
 ## 响应式布局
 
