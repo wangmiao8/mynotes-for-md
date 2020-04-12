@@ -23,7 +23,7 @@ UL LI           /* a=0 b=0 c=2 */
 UL OL+LI        /* a=0 b=0 c=3 */
 H1 + *[REL=up]  /* a=0 b=1 c=1 */
 UL OL LI.red    /* a=0 b=1 c=3 */
-LI.red.level    /* a=0 b=2 c=1 */
+LI.red.level    /* a=0 b=2 c=1 */ 
 #x34y           /* a=1 b=0 c=0 */
 #s12:not(FOO)   /* a=1 b=0 c=1 */
 .foo :is(.bar, #baz)
@@ -129,7 +129,7 @@ IE 盒模型：width = content + padding + border
 
 JavaScript 获取元素宽高方式和优缺点：
 
-1. `ele.style.width/height `：只能获取到行内样式设置的宽高，不能获取到 link 或者 style 内设置的宽高。
+1. `ele.style.width/height`：只能获取到行内样式设置的宽高，不能获取到 link 或者 style 内设置的宽高。
 
 2. `ele.currentStyle.width/height`：能获取到渲染后的宽高，但只有 IE 上支持。
 
